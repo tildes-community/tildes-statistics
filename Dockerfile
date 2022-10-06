@@ -5,8 +5,8 @@ RUN USER=root cargo new --bin tildes-statistics
 WORKDIR /tildes-statistics
 RUN mv src source
 
-# Copy the Cargo files and build in release, caching the dependencies.
-COPY Cargo.* .
+# Copy the configuration files and build in release, caching the dependencies.
+COPY Cargo.lock Cargo.toml askama.toml .
 RUN cargo build --release
 
 # Then copy our code. This way when only the source code changes, the
