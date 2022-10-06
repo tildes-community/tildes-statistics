@@ -7,3 +7,7 @@ coverage/
 
 # Environment configuration
 .env
+
+# NodeJS files
+node_modules/
+pnpm-lock.yaml
