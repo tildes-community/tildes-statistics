@@ -1,0 +1,41 @@
+[package]
+name = "tildes-statistics"
+description = "Statistics for Tildes.net."
+repository = "https://git.bauke.xyz/Bauke/tildes-statistics"
+license = "AGPL-3.0-or-later"
+version = "0.1.0"
+authors = ["Bauke <me@bauke.xyz>"]
+edition = "2021"
+
+[[bin]]
+name = "tildes-statistics"
+path = "source/main.rs"
+
+[dependencies]
+async-std = "1.12.0"
+chrono = "0.4.22"
+color-eyre = "0.6.2"
+dotenvy = "0.15.5"
+sea-orm-migration = "0.9.3"
+tracing = "0.1.36"
+
+[dependencies.clap]
+features = ["derive"]
+version = "4.0.10"
+
+[dependencies.sea-orm]
+features = ["macros", "mock", "runtime-async-std-rustls", "sqlx-postgres"]
+version = "0.9.3"
+
+[dependencies.surf]
+default-features = false
+features = ["encoding", "h1-client-rustls", "middleware-logger"]
+version = "2.3.2"
+
+[dependencies.tildes-parser]
+git = "https://git.bauke.xyz/Bauke/tildes-parser.git"
+rev = "08bf7ed"
+
+[dependencies.tracing-subscriber]
+features = ["env-filter"]
+version = "0.3.15"
