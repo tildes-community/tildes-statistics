@@ -24,6 +24,11 @@ tracing = "0.1.36"
 features = ["derive"]
 version = "4.0.10"
 
+[dependencies.plotters]
+default-features = false
+features = ["svg_backend"]
+version = "0.3.4"
+
 [dependencies.sea-orm]
 features = ["macros", "mock", "runtime-async-std-rustls", "sqlx-postgres"]
 version = "0.9.3"
