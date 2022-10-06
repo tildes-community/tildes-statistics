@@ -15,6 +15,7 @@ pub mod cli;
 pub mod group_data;
 pub mod migrations;
 pub mod snapshots;
+pub mod templates;
 pub mod utilities;
 
 /// The entities code is auto-generated using `sea-orm-cli`. With a database
