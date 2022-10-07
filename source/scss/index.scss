@@ -22,7 +22,9 @@
 }
 
 .page-main {
-  h2 {
+  h2,
+  img,
+  p {
     margin-bottom: var(--medium-spacing);
   }
 }
