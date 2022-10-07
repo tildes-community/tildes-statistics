@@ -5,29 +5,44 @@ use {
   sea_orm::{prelude::*, QueryOrder},
 };
 
-use crate::entities::snapshot;
-
 mod create;
 
-pub use create::create;
+pub use crate::entities::snapshot::{
+  ActiveModel as SnapshotActiveModel, Column as SnapshotColumn,
+  Entity as SnapshotEntity, Model as SnapshotModel,
+};
 
-/// Get a snapshot for a given date.
-pub async fn get_by_date(
-  db: &DatabaseConnection,
-  date: ChronoDate,
-) -> Result<Option<snapshot::Model>> {
-  let existing = snapshot::Entity::find()
-    .filter(snapshot::Column::Date.eq(date))
-    .order_by_desc(snapshot::Column::Date)
-    .one(db)
-    .await?;
+impl SnapshotModel {
+  /// Get a snapshot for a given date.
+  pub async fn get_by_date(
+    db: &DatabaseConnection,
+    date: ChronoDate,
+  ) -> Result<Option<Self>> {
+    let existing = SnapshotEntity::find()
+      .filter(SnapshotColumn::Date.eq(date))
+      .order_by_desc(SnapshotColumn::Date)
+      .one(db)
+      .await?;
 
-  Ok(existing)
-}
+    Ok(existing)
+  }
 
-/// Get all snapshots.
-pub async fn get_all(db: &DatabaseConnection) -> Result<Vec<snapshot::Model>> {
-  let snapshots = snapshot::Entity::find().all(db).await?;
+  /// Get all snapshots.
+  pub async fn get_all(db: &DatabaseConnection) -> Result<Vec<Self>> {
+    let snapshots = SnapshotEntity::find().all(db).await?;
 
-  Ok(snapshots)
+    Ok(snapshots)
+  }
+
+  /// Get the most recent snapshot.
+  pub async fn get_most_recent(
+    db: &DatabaseConnection,
+  ) -> Result<Option<Self>> {
+    let snapshot = SnapshotEntity::find()
+      .order_by_desc(SnapshotColumn::Date)
+      .one(db)
+      .await?;
+
+    Ok(snapshot)
+  }
 }

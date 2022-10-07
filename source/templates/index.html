@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="/css/index.css">
+{% endblock %}
+
+{% block body %}
+<header class="page-header">
+  <h1>Tildes Statistics</h1>
+</header>
+
+<main class="page-main">
+  <h2>General</h2>
+
+  <p>
+    There are currently an
+    <abbr title="Based on the group with the highest subscriber count.">estimated</abbr>
+    <span class="underline">{{ user_count }}</span>
+    registered users on Tildes.
+  </p>
+
+  <img src="/charts/user-count.svg" alt="User Count Chart">
+</main>
+
+<footer class="page-footer">
+  <p>
+    Last generated on
+    <time class="underline" datetime="{{ today }}">{{- today -}}</time>.
+  </p>
+
+  <p>
+    &copy; Code
+    <a href="https://git.bauke.xyz/Bauke/tildes-statistics">AGPL-3.0-or-later</a>,
+    charts & data
+    <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.
+  </p>
+
+  <p class="bold">
+    Consider joining <a href="https://tildes.net">Tildes</a>, a non-profit
+    community site driven by its users' interests.
+  </p>
+</footer>
+{% endblock %}

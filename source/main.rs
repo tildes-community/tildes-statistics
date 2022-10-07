@@ -11,9 +11,11 @@ use {
   tracing_subscriber::filter::{EnvFilter, LevelFilter},
 };
 
+pub mod charts;
 pub mod cli;
 pub mod group_data;
 pub mod migrations;
+pub mod scss;
 pub mod snapshots;
 pub mod templates;
 pub mod utilities;

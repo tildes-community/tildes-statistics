@@ -1,6 +1,7 @@
 //! All CLI-related code.
 
 use {
+  async_std::path::PathBuf,
   chrono::NaiveDate,
   clap::{Parser, Subcommand},
 };
@@ -43,6 +44,13 @@ pub enum MainSubcommands {
     #[command(subcommand)]
     command: SnapshotSubcommands,
   },
+
+  /// Website management.
+  Web {
+    /// Website management.
+    #[command(subcommand)]
+    command: WebSubcommands,
+  },
 }
 
 /// Migrate subcommands.
@@ -84,5 +92,16 @@ pub enum SnapshotSubcommands {
     /// The date of the snapshot to show, defaults to today.
     #[clap(short, long)]
     date: Option<NaiveDate>,
+  },
+}
+
+/// Website subcommands.
+#[derive(Debug, Subcommand)]
+pub enum WebSubcommands {
+  /// Build the website.
+  Build {
+    /// The output directory for the website files.
+    #[clap(short, long, default_value = "public")]
+    output: PathBuf,
   },
 }

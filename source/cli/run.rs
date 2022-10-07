@@ -1,15 +1,21 @@
 //! All logic for running the CLI.
 
 use {
-  clap::Parser, color_eyre::Result, sea_orm_migration::MigratorTrait,
-  tracing::info,
+  async_std::fs::create_dir_all, clap::Parser, color_eyre::Result,
+  sea_orm_migration::MigratorTrait, tracing::info,
 };
 
 use crate::{
-  cli::{Cli, MainSubcommands, MigrateSubcommands, SnapshotSubcommands},
-  group_data::get_all_by_snapshot,
+  charts::UserCountChart,
+  cli::{
+    Cli, MainSubcommands, MigrateSubcommands, SnapshotSubcommands,
+    WebSubcommands,
+  },
+  group_data::GroupDataModel,
   migrations::Migrator,
-  snapshots::{self, get_by_date},
+  scss::generate_css,
+  snapshots::SnapshotModel,
+  templates::HomeTemplate,
   utilities::{create_db, today},
 };
 
@@ -43,18 +49,20 @@ pub async fn run() -> Result<()> {
       command: snapshot_command,
     } => match snapshot_command {
       SnapshotSubcommands::Create { force } => {
-        snapshots::create(&db, force).await?;
+        SnapshotModel::create(&db, force).await?;
       }
 
       SnapshotSubcommands::List {} => {
-        for snapshot in snapshots::get_all(&db).await? {
+        for snapshot in SnapshotModel::get_all(&db).await? {
           info!("Snapshot {snapshot:?}")
         }
       }
 
       SnapshotSubcommands::Show { date } => {
         let date = date.unwrap_or_else(today);
-        let snapshot = if let Some(snapshot) = get_by_date(&db, date).await? {
+        let snapshot = if let Some(snapshot) =
+          SnapshotModel::get_by_date(&db, date).await?
+        {
           info!("Snapshot {snapshot:?}");
           snapshot
         } else {
@@ -62,13 +70,42 @@ pub async fn run() -> Result<()> {
           return Ok(());
         };
 
-        let groups = get_all_by_snapshot(&db, &snapshot).await?;
-        for group in groups {
+        for group in GroupDataModel::get_all_by_snapshot(&db, &snapshot).await?
+        {
           info!(
             id = group.id,
             name = group.name,
             subscribers = group.subscribers,
           );
+        }
+      }
+    },
+
+    MainSubcommands::Web {
+      command: web_command,
+    } => match web_command {
+      WebSubcommands::Build { output } => {
+        let user_count_group =
+          if let Some(snapshot) = SnapshotModel::get_most_recent(&db).await? {
+            GroupDataModel::get_highest_subscribers(&db, &snapshot).await?
+          } else {
+            None
+          };
+
+        create_dir_all(&output).await?;
+        HomeTemplate::new(
+          user_count_group.as_ref().map(|group| group.subscribers),
+        )
+        .render_to_file(&output)
+        .await?;
+        generate_css(&output).await?;
+
+        if let Some(group) = user_count_group {
+          let groups =
+            GroupDataModel::get_n_most_recent(&db, 30, &group.name).await?;
+          UserCountChart { groups }
+            .render(&output, &group.name)
+            .await?;
         }
       }
     },
