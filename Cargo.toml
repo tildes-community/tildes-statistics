@@ -27,7 +27,7 @@ version = "4.0.10"
 
 [dependencies.plotters]
 default-features = false
-features = ["svg_backend"]
+features = ["line_series", "point_series", "svg_backend"]
 version = "0.3.4"
 
 [dependencies.sea-orm]
