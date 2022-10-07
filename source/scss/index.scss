@@ -26,6 +26,10 @@
   img,
   p {
     margin-bottom: var(--medium-spacing);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
