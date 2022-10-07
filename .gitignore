@@ -11,3 +11,6 @@ coverage/
 # NodeJS files
 node_modules/
 pnpm-lock.yaml
+
+# Default web build output directory
+public/
