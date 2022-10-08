@@ -19,6 +19,32 @@
   </p>
 
   <img src="/charts/user-count.svg" alt="User Count Chart">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Group</th>
+        <th>Subscribers</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for group in groups %}
+      <tr>
+        <td>
+          <a href="https://tildes.net/{{ group.name }}">{{ group.name }}</a>
+        </td>
+        <td>{{ group.subscribers }}</td>
+        <td>
+          {% if let Some(description) = group.description %}
+          {{ description }}
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </main>
 
 <footer class="page-footer">

@@ -7,12 +7,15 @@ use {
   color_eyre::Result,
 };
 
-use crate::utilities::today;
+use crate::{group_data::GroupDataModel, utilities::today};
 
 /// The template for the home page.
 #[derive(Template)]
 #[template(path = "index.html")]
 pub struct HomeTemplate {
+  /// The groups to create the table with.
+  pub groups: Vec<GroupDataModel>,
+
   /// The string for the `<title>` element.
   pub page_title: String,
 
@@ -25,8 +28,9 @@ pub struct HomeTemplate {
 
 impl HomeTemplate {
   /// Create a new [`HomeTemplate`].
-  pub fn new(user_count: Option<i64>) -> Self {
+  pub fn new(groups: Vec<GroupDataModel>, user_count: Option<i64>) -> Self {
     Self {
+      groups,
       page_title: "Tildes Statistics".to_string(),
       today: today(),
       user_count: user_count

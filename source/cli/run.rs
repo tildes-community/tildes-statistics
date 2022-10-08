@@ -85,15 +85,19 @@ pub async fn run() -> Result<()> {
       command: web_command,
     } => match web_command {
       WebSubcommands::Build { output } => {
-        let user_count_group =
+        let (groups, user_count_group) =
           if let Some(snapshot) = SnapshotModel::get_most_recent(&db).await? {
-            GroupDataModel::get_highest_subscribers(&db, &snapshot).await?
+            (
+              GroupDataModel::get_all_by_snapshot(&db, &snapshot).await?,
+              GroupDataModel::get_highest_subscribers(&db, &snapshot).await?,
+            )
           } else {
-            None
+            (vec![], None)
           };
 
         create_dir_all(&output).await?;
         HomeTemplate::new(
+          groups,
           user_count_group.as_ref().map(|group| group.subscribers),
         )
         .render_to_file(&output)

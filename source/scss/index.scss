@@ -24,11 +24,39 @@
 .page-main {
   h2,
   img,
-  p {
+  p,
+  table {
     margin-bottom: var(--medium-spacing);
 
     &:last-child {
       margin-bottom: 0;
+    }
+  }
+
+  table {
+    border: 2px solid var(--background-2);
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  thead {
+    background-color: var(--background-2);
+    border-bottom: 2px solid var(--background-2);
+    text-align: left;
+  }
+
+  tr {
+    border: 2px solid var(--background-2);
+  }
+
+  td,
+  th {
+    padding: var(--medium-spacing);
+  }
+
+  tbody {
+    > tr:nth-of-type(2n) {
+      background-color: var(--background-2);
     }
   }
 }
