@@ -8,10 +8,10 @@ use {
 
 use crate::group_data::GroupDataModel;
 
-const BACKGROUND_1: RGBColor = RGBColor(17, 17, 17);
-const BACKGROUND_2: RGBColor = RGBColor(0, 0, 0);
-const FOREGROUND: RGBColor = RGBColor(255, 255, 255);
-const ACCENT_1: RGBColor = RGBColor(255, 0, 255);
+const BACKGROUND_1: RGBColor = RGBColor(31, 23, 49);
+const BACKGROUND_2: RGBColor = RGBColor(42, 32, 65);
+const FOREGROUND: RGBColor = RGBColor(242, 239, 255);
+const ACCENT_1: RGBColor = RGBColor(210, 184, 58);
 
 /// The chart for the user count.
 #[derive(Debug)]
@@ -46,7 +46,7 @@ impl UserCountChart {
 
     let path = parent.join("user-count.svg");
     let chart_root = SVGBackend::new(&path, (1280, 720)).into_drawing_area();
-    chart_root.fill(&BACKGROUND_1)?;
+    chart_root.fill(&BACKGROUND_2)?;
 
     let text_style =
       |font_size: i32| ("sans-serif", font_size).into_font().color(&FOREGROUND);
@@ -55,7 +55,7 @@ impl UserCountChart {
       .margin(20, 20, 20, 20)
       .titled("Tildes User Count", text_style(30))?;
 
-    chart_root.fill(&BACKGROUND_1)?;
+    chart_root.fill(&BACKGROUND_2)?;
 
     let mut chart = ChartBuilder::on(&chart_root)
       .caption(
@@ -75,9 +75,9 @@ impl UserCountChart {
       .y_labels(5)
       .y_label_formatter(&|y| format!("{y:0}"))
       .label_style(text_style(20))
-      .axis_style(&BACKGROUND_2)
-      .light_line_style(&BACKGROUND_2)
-      .bold_line_style(&BACKGROUND_1)
+      .axis_style(&BACKGROUND_1)
+      .light_line_style(&BACKGROUND_1)
+      .bold_line_style(&BACKGROUND_2)
       .draw()?;
 
     chart

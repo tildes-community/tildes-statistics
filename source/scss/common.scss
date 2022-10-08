@@ -6,11 +6,11 @@ body {
   --small-spacing: 4px;
   --medium-spacing: 8px;
   --large-spacing: 16px;
-  --background-1: #222;
-  --background-2: #111;
-  --foreground-1: #fff;
-  --anchor-1: #f0f;
-  --anchor-2: #000;
+  --background-1: #1f1731;
+  --background-2: #2a2041;
+  --foreground-1: #f2efff;
+  --anchor-1: #d2b83a;
+  --anchor-2: var(--foreground-1);
 
   background-color: var(--background-1);
   color: var(--foreground-1);
@@ -20,10 +20,8 @@ body {
 a,
 a:visited {
   color: var(--anchor-1);
-  text-decoration: none;
 
   &:hover {
-    background-color: var(--anchor-1);
     color: var(--anchor-2);
   }
 }
