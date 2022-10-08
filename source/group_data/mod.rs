@@ -44,7 +44,7 @@ impl GroupDataModel {
     name: &str,
   ) -> Result<Vec<Self>> {
     let groups = GroupDataEntity::find()
-      .order_by_desc(GroupDataColumn::SnapshotId)
+      .order_by_asc(GroupDataColumn::SnapshotId)
       .filter(GroupDataColumn::Name.eq(name))
       .limit(amount)
       .all(db)
