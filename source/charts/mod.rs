@@ -62,8 +62,8 @@ impl UserCountChart {
         format!("Using the {group_name} subscriber count."),
         text_style(20),
       )
-      .x_label_area_size(40)
-      .y_label_area_size(40)
+      .x_label_area_size(50)
+      .y_label_area_size(50)
       .margin(10)
       .build_cartesian_2d(0..(datapoints_len + 1), min_count..max_count)?;
 
