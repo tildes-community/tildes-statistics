@@ -48,12 +48,13 @@ impl GroupDataModel {
     amount: u64,
     name: &str,
   ) -> Result<Vec<Self>> {
-    let groups = GroupDataEntity::find()
-      .order_by_asc(GroupDataColumn::SnapshotId)
+    let mut groups = GroupDataEntity::find()
+      .order_by_desc(GroupDataColumn::SnapshotId)
       .filter(GroupDataColumn::Name.eq(name))
       .limit(amount)
       .all(db)
       .await?;
+    groups.reverse();
 
     Ok(groups)
   }
