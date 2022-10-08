@@ -10,6 +10,7 @@ use crate::group_data::GroupDataModel;
 
 const BACKGROUND_1: RGBColor = RGBColor(31, 23, 49);
 const BACKGROUND_2: RGBColor = RGBColor(42, 32, 65);
+const BACKGROUND_3: RGBColor = RGBColor(10, 8, 16);
 const FOREGROUND: RGBColor = RGBColor(242, 239, 255);
 const ACCENT_1: RGBColor = RGBColor(210, 184, 58);
 
@@ -77,7 +78,7 @@ impl UserCountChart {
       .label_style(text_style(20))
       .axis_style(&BACKGROUND_1)
       .light_line_style(&BACKGROUND_1)
-      .bold_line_style(&BACKGROUND_2)
+      .bold_line_style(&BACKGROUND_3)
       .draw()?;
 
     chart
