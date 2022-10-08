@@ -19,7 +19,12 @@ impl GroupDataModel {
     db: &DatabaseConnection,
     snapshot: &SnapshotModel,
   ) -> Result<Vec<Self>> {
-    let groups = snapshot.find_related(GroupDataEntity).all(db).await?;
+    let groups = snapshot
+      .find_related(GroupDataEntity)
+      .order_by_asc(GroupDataColumn::Name)
+      .all(db)
+      .await?;
+
     Ok(groups)
   }
 
