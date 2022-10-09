@@ -10,12 +10,13 @@ use {
 use crate::{
   group_data::{GroupDataActiveModel, GroupDataEntity},
   snapshots::{SnapshotActiveModel, SnapshotModel},
-  utilities::{create_http_client, download_html, today},
+  utilities::{create_http_client, download_html, get_base_url, today},
 };
 
 impl SnapshotModel {
   /// Create a snapshot for today.
   pub async fn create(db: &DatabaseConnection, force: bool) -> Result<()> {
+    let base_url = get_base_url();
     let snapshot_date = today();
     match (force, Self::get_by_date(db, snapshot_date).await?) {
       (true, Some(existing)) => {
@@ -44,7 +45,7 @@ impl SnapshotModel {
 
     let http = create_http_client()?;
     let group_list = GroupList::from_html(
-      &download_html(&http, "https://tildes.net/groups").await?,
+      &download_html(&http, format!("{}/groups", base_url)).await?,
     )?;
 
     let mut groups_to_insert = vec![];
@@ -52,8 +53,7 @@ impl SnapshotModel {
     for summary in group_list.summaries {
       debug!(summary = ?summary);
       let group = Group::from_html(
-        &download_html(&http, format!("https://tildes.net/{}", summary.name))
-          .await?,
+        &download_html(&http, format!("{}/{}", base_url, summary.name)).await?,
       )?;
 
       debug!(group = ?group);

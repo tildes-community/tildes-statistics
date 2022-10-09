@@ -52,6 +52,12 @@ pub async fn download_html(
   Ok(Html::parse_document(&html))
 }
 
+/// Get the `BASE_URL` environment variable or the default `https://tildes.net`
+/// base URL.
+pub fn get_base_url() -> String {
+  get_env_var("BASE_URL").unwrap_or_else(|_| "https://tildes.net".to_string())
+}
+
 /// Shorthand for [`std::env::var`] with wrapped error message.
 pub fn get_env_var(key: &str) -> Result<String> {
   std::env::var(key).wrap_err(key.to_string())

@@ -34,7 +34,7 @@
       {% for group in groups %}
       <tr>
         <td>
-          <a href="https://tildes.net/{{ group.name }}">{{ group.name }}</a>
+          <a href="{{ base_url }}/{{ group.name }}">{{ group.name }}</a>
         </td>
         <td>{{ group.subscribers }}</td>
         <td>
@@ -62,7 +62,7 @@
   </p>
 
   <p class="bold">
-    Consider joining <a href="https://tildes.net">Tildes</a>, a non-profit
+    Consider joining <a href="{{ base_url }}">Tildes</a>, a non-profit
     community site driven by its users' interests.
   </p>
 </footer>

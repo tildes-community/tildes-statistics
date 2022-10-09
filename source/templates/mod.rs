@@ -10,12 +10,18 @@ use {
   color_eyre::Result,
 };
 
-use crate::{group_data::GroupDataModel, utilities::today};
+use crate::{
+  group_data::GroupDataModel,
+  utilities::{get_base_url, today},
+};
 
 /// The template for the home page.
 #[derive(Template)]
 #[template(path = "index.html")]
 pub struct HomeTemplate {
+  /// The base URL for links to the Tildes instance.
+  pub base_url: String,
+
   /// Extra HTML to insert in the body.
   pub extra_body_html: String,
 
@@ -45,6 +51,7 @@ impl HomeTemplate {
     let extra_head_html = read_to_string("extra-head.html").await;
 
     Self {
+      base_url: get_base_url(),
       extra_body_html: extra_body_html.unwrap_or_default(),
       extra_head_html: extra_head_html.unwrap_or_default(),
       groups,
