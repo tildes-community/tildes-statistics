@@ -78,6 +78,7 @@ pub async fn run() -> Result<()> {
           (Some(snapshot), _) => snapshot,
         };
 
+        info!("Snapshot {snapshot:?}");
         for group in GroupDataModel::get_all_by_snapshot(&db, &snapshot).await?
         {
           info!(
