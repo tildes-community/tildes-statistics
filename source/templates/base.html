@@ -10,10 +10,12 @@
   <link rel="stylesheet" href="/css/modern-normalize.css">
   <link rel="stylesheet" href="/css/common.css">
   {% block head %}{% endblock %}
+  {{ extra_head_html|safe }}
 </head>
 
 <body>
   {% block body %}{% endblock %}
+  {{ extra_body_html|safe }}
 </body>
 
 </html>

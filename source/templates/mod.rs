@@ -2,7 +2,10 @@
 
 use {
   askama::Template,
-  async_std::{fs::write, path::PathBuf},
+  async_std::{
+    fs::{read_to_string, write},
+    path::PathBuf,
+  },
   chrono::NaiveDate,
   color_eyre::Result,
 };
@@ -13,6 +16,12 @@ use crate::{group_data::GroupDataModel, utilities::today};
 #[derive(Template)]
 #[template(path = "index.html")]
 pub struct HomeTemplate {
+  /// Extra HTML to insert in the body.
+  pub extra_body_html: String,
+
+  /// Extra HTML to insert in the head.
+  pub extra_head_html: String,
+
   /// The groups to create the table with.
   pub groups: Vec<GroupDataModel>,
 
@@ -28,8 +37,16 @@ pub struct HomeTemplate {
 
 impl HomeTemplate {
   /// Create a new [`HomeTemplate`].
-  pub fn new(groups: Vec<GroupDataModel>, user_count: Option<i64>) -> Self {
+  pub async fn new(
+    groups: Vec<GroupDataModel>,
+    user_count: Option<i64>,
+  ) -> Self {
+    let extra_body_html = read_to_string("extra-body.html").await;
+    let extra_head_html = read_to_string("extra-head.html").await;
+
     Self {
+      extra_body_html: extra_body_html.unwrap_or_default(),
+      extra_head_html: extra_head_html.unwrap_or_default(),
       groups,
       page_title: "Tildes Statistics".to_string(),
       today: today(),

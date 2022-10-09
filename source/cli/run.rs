@@ -110,6 +110,7 @@ pub async fn run() -> Result<()> {
           groups,
           user_count_group.as_ref().map(|group| group.subscribers),
         )
+        .await
         .render_to_file(&output)
         .await?;
         generate_css(&output).await?;
