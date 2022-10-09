@@ -17,8 +17,15 @@
 }
 
 .page-header {
+  align-items: center;
   border-bottom: 4px solid var(--background-2);
+  display: flex;
   padding: var(--large-spacing);
+
+  img {
+    height: 4rem;
+    margin-right: var(--large-spacing);
+  }
 }
 
 .page-main {

@@ -11,6 +11,7 @@ use {
   tracing_subscriber::filter::{EnvFilter, LevelFilter},
 };
 
+pub mod assets;
 pub mod charts;
 pub mod cli;
 pub mod group_data;

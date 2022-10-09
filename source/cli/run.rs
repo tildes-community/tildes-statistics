@@ -6,6 +6,7 @@ use {
 };
 
 use crate::{
+  assets::write_assets,
   charts::UserCountChart,
   cli::{
     Cli, MainSubcommands, MigrateSubcommands, SnapshotSubcommands,
@@ -112,6 +113,7 @@ pub async fn run() -> Result<()> {
         .render_to_file(&output)
         .await?;
         generate_css(&output).await?;
+        write_assets(&output).await?;
 
         if let Some(group) = user_count_group {
           let groups =
