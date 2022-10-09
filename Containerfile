@@ -12,6 +12,7 @@ RUN cargo build --release
 # Then copy our code. This way when only the source code changes, the
 # dependencies don't have to be entirely rebuilt.
 COPY source source
+COPY node_modules/modern-normalize node_modules/modern-normalize
 
 # Remove the cached tildes-statistics dependencies.
 RUN rm target/release/deps/tildes_statistics*
