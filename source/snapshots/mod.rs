@@ -27,6 +27,19 @@ impl SnapshotModel {
     Ok(existing)
   }
 
+  /// Get a snapshot by a given ID.
+  pub async fn get_by_id(
+    db: &DatabaseConnection,
+    id: i64,
+  ) -> Result<Option<Self>> {
+    let snapshot = SnapshotEntity::find()
+      .filter(SnapshotColumn::Id.eq(id))
+      .one(db)
+      .await?;
+
+    Ok(snapshot)
+  }
+
   /// Get all snapshots.
   pub async fn get_all(db: &DatabaseConnection) -> Result<Vec<Self>> {
     let snapshots = SnapshotEntity::find().all(db).await?;

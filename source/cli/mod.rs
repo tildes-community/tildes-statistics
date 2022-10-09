@@ -90,8 +90,12 @@ pub enum SnapshotSubcommands {
   /// Show a snapshot.
   Show {
     /// The date of the snapshot to show, defaults to today.
-    #[clap(short, long)]
+    #[clap(short, long, group = "selection")]
     date: Option<NaiveDate>,
+
+    /// The ID of the snapshot to show.
+    #[clap(long, group = "selection")]
+    id: Option<i64>,
   },
 }
 

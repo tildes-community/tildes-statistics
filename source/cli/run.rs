@@ -58,16 +58,24 @@ pub async fn run() -> Result<()> {
         }
       }
 
-      SnapshotSubcommands::Show { date } => {
+      SnapshotSubcommands::Show { date, id } => {
         let date = date.unwrap_or_else(today);
-        let snapshot = if let Some(snapshot) =
-          SnapshotModel::get_by_date(&db, date).await?
-        {
-          info!("Snapshot {snapshot:?}");
-          snapshot
-        } else {
-          info!("No snapshot exists for {date}");
-          return Ok(());
+
+        let snapshot = match id {
+          Some(id) => SnapshotModel::get_by_id(&db, id).await,
+          None => SnapshotModel::get_by_date(&db, date).await,
+        }?;
+
+        let snapshot = match (snapshot, id) {
+          (None, Some(id)) => {
+            info!("No snapshot exists for id {id}");
+            return Ok(());
+          }
+          (None, None) => {
+            info!("No snapshot exists for date {date}");
+            return Ok(());
+          }
+          (Some(snapshot), _) => snapshot,
         };
 
         for group in GroupDataModel::get_all_by_snapshot(&db, &snapshot).await?
