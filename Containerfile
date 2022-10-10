@@ -18,7 +18,7 @@ COPY node_modules/modern-normalize node_modules/modern-normalize
 RUN rm target/release/deps/tildes_statistics*
 
 # Build the executable with actual source code.
-RUN cargo install --path .
+RUN cargo install --offline --path .
 
 # Copy the executable to a smaller final image.
 FROM debian:bullseye-slim
