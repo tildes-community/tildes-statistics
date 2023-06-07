@@ -130,7 +130,8 @@ pub async fn run() -> Result<()> {
         write_assets(&output).await?;
 
         if let Some(group) = user_count_group {
-          let path = output.join(&format!("charts/user-count/{}", &group.name));
+          let path =
+            output.join(&format!("charts/user-count/{}.svg", &group.name));
           copy(path, output.join("charts/main-user-count.svg")).await?;
         }
       }
