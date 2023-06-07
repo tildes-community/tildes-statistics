@@ -112,7 +112,7 @@ pub async fn run() -> Result<()> {
 
         for group in &groups {
           UserCountChart {
-            groups: GroupDataModel::get_n_most_recent(&db, 30, &group.name)
+            groups: GroupDataModel::get_n_most_recent(&db, 31, &group.name)
               .await?,
           }
           .render(&output, &group.name, true)
