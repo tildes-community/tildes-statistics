@@ -1,8 +1,11 @@
 //! All logic for running the CLI.
 
 use {
-  async_std::fs::create_dir_all, clap::Parser, color_eyre::Result,
-  sea_orm_migration::MigratorTrait, tracing::info,
+  async_std::fs::{copy, create_dir_all},
+  clap::Parser,
+  color_eyre::Result,
+  sea_orm_migration::MigratorTrait,
+  tracing::info,
 };
 
 use crate::{
@@ -106,6 +109,16 @@ pub async fn run() -> Result<()> {
           };
 
         create_dir_all(&output).await?;
+
+        for group in &groups {
+          UserCountChart {
+            groups: GroupDataModel::get_n_most_recent(&db, 30, &group.name)
+              .await?,
+          }
+          .render(&output, &group.name)
+          .await?;
+        }
+
         HomeTemplate::new(
           groups,
           user_count_group.as_ref().map(|group| group.subscribers),
@@ -117,11 +130,8 @@ pub async fn run() -> Result<()> {
         write_assets(&output).await?;
 
         if let Some(group) = user_count_group {
-          let groups =
-            GroupDataModel::get_n_most_recent(&db, 30, &group.name).await?;
-          UserCountChart { groups }
-            .render(&output, &group.name)
-            .await?;
+          let path = output.join(&format!("charts/user-count/{}", &group.name));
+          copy(path, output.join("charts/main-user-count.svg")).await?;
         }
       }
     },

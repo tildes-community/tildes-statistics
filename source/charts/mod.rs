@@ -23,8 +23,12 @@ pub struct UserCountChart {
 
 impl UserCountChart {
   /// Render the chart and write it to file.
-  pub async fn render(&self, parent: &PathBuf, group_name: &str) -> Result<()> {
-    let parent = parent.join("charts");
+  pub async fn render(
+    &self,
+    parent: &PathBuf,
+    group_name: &str,
+  ) -> Result<PathBuf> {
+    let parent = parent.join("charts/user-count");
     create_dir_all(&parent).await?;
 
     let (mut datapoints, mut min_count, mut max_count) = (vec![], i64::MAX, 0);
@@ -45,7 +49,8 @@ impl UserCountChart {
     let min_count = min_count - 10;
     let max_count = max_count + 10;
 
-    let path = parent.join("user-count.svg");
+    let path = parent.join(format!("{group_name}.svg"));
+    let output_path = path.clone();
     let chart_root = SVGBackend::new(&path, (1280, 720)).into_drawing_area();
     chart_root.fill(&BACKGROUND_2)?;
 
@@ -112,6 +117,6 @@ impl UserCountChart {
       },
     ))?;
 
-    Ok(())
+    Ok(output_path)
   }
 }
