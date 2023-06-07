@@ -77,7 +77,13 @@ impl UserCountChart {
     chart
       .configure_mesh()
       .x_labels(datapoints.len() + 2)
-      .x_label_formatter(&|x| format!("{:0}", datapoints_len - x))
+      .x_label_formatter(&|x| {
+        if (x - 1) % (datapoints_len / 20) != 0 {
+          String::new()
+        } else {
+          format!("{:0}", datapoints_len - x)
+        }
+      })
       .x_desc("N days ago")
       .y_labels(5)
       .y_label_formatter(&|y| format!("{y:0}"))
@@ -114,7 +120,7 @@ impl UserCountChart {
           )
           + Text::new(
             {
-              if (x - 1) % 2 != 0 {
+              if (x - 1) % (datapoints_len / 10) != 0 {
                 String::new()
               } else {
                 format!("{:0}", y)
