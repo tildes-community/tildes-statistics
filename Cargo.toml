@@ -12,13 +12,13 @@ name = "tildes-statistics"
 path = "source/main.rs"
 
 [dependencies]
-askama = "0.11.1"
+askama = "0.12.0"
 async-std = "1.12.0"
 chrono = "0.4.22"
 color-eyre = "0.6.2"
 dotenvy = "0.15.5"
 grass = "0.11.2"
-sea-orm-migration = "0.9.3"
+sea-orm-migration = "0.11.3"
 tracing = "0.1.36"
 
 [dependencies.clap]
@@ -32,7 +32,7 @@ version = "0.3.4"
 
 [dependencies.sea-orm]
 features = ["macros", "mock", "runtime-async-std-rustls", "sqlx-postgres"]
-version = "0.9.3"
+version = "0.11.3"
 
 [dependencies.surf]
 default-features = false

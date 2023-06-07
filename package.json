@@ -4,11 +4,11 @@
     "test": "stylelint 'source/**/*.scss'"
   },
   "dependencies": {
-    "modern-normalize": "^1.1.0"
+    "modern-normalize": "^2.0.0"
   },
   "devDependencies": {
-    "stylelint": "^14.12.1",
-    "stylelint-config-standard-scss": "^5.0.0"
+    "stylelint": "^15.7.0",
+    "stylelint-config-standard-scss": "^9.0.0"
   },
   "stylelint": {
     "extends": [
