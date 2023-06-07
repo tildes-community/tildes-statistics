@@ -106,7 +106,7 @@ impl UserCountChart {
                 format!("{:0}", y)
               }
             },
-            (-10, 15),
+            (-20, -25),
             text_style(20),
           )
       },
