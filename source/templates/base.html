@@ -15,6 +15,26 @@
 
 <body>
   {% block body %}{% endblock %}
+
+  <footer class="page-footer">
+    <p>
+      Last generated on
+      <time class="underline" datetime="{{ today }}">{{- today -}}</time>.
+    </p>
+
+    <p>
+      &copy; Code
+      <a href="https://git.bauke.xyz/Bauke/tildes-statistics">AGPL-3.0-or-later</a>,
+      charts & data
+      <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.
+    </p>
+
+    <p class="bold">
+      Consider joining <a href="{{ base_url }}">Tildes</a>, a non-profit
+      community site driven by its users' interests.
+    </p>
+  </footer>
+
   {{ extra_body_html|safe }}
 </body>
 

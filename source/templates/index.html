@@ -21,49 +21,34 @@
 
   <img class="chart" src="/charts/main-user-count.svg" alt="User Count Chart">
 
-  <table>
-    <thead>
-      <tr>
-        <th>Group</th>
-        <th>Subscribers</th>
-        <th>Description</th>
-      </tr>
-    </thead>
+  <details open>
+    <summary>Groups Overview</summary>
 
-    <tbody>
-      {% for group in groups %}
-      <tr>
-        <td>
-          <a href="{{ base_url }}/{{ group.name }}">{{ group.name }}</a>
-        </td>
-        <td>{{ group.subscribers }}</td>
-        <td>
-          {% if let Some(description) = group.description %}
-          {{ description }}
-          {% endif %}
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    <table>
+      <thead>
+        <tr>
+          <th>Group</th>
+          <th>Subscribers</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for group in groups %}
+        <tr>
+          <td>
+            <a href="{{ base_url }}/{{ group.name }}">{{ group.name }}</a>
+          </td>
+          <td>{{ group.subscribers }}</td>
+          <td>
+            {% if let Some(description) = group.description %}
+            {{ description }}
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </details>
 </main>
-
-<footer class="page-footer">
-  <p>
-    Last generated on
-    <time class="underline" datetime="{{ today }}">{{- today -}}</time>.
-  </p>
-
-  <p>
-    &copy; Code
-    <a href="https://git.bauke.xyz/Bauke/tildes-statistics">AGPL-3.0-or-later</a>,
-    charts & data
-    <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.
-  </p>
-
-  <p class="bold">
-    Consider joining <a href="{{ base_url }}">Tildes</a>, a non-profit
-    community site driven by its users' interests.
-  </p>
-</footer>
 {% endblock %}
