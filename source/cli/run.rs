@@ -115,7 +115,7 @@ pub async fn run() -> Result<()> {
             groups: GroupDataModel::get_n_most_recent(&db, 30, &group.name)
               .await?,
           }
-          .render(&output, &group.name)
+          .render(&output, &group.name, true)
           .await?;
         }
 

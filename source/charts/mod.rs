@@ -27,6 +27,7 @@ impl UserCountChart {
     &self,
     parent: &PathBuf,
     group_name: &str,
+    render_point_circles: bool,
   ) -> Result<PathBuf> {
     let parent = parent.join("charts/user-count");
     create_dir_all(&parent).await?;
@@ -102,7 +103,15 @@ impl UserCountChart {
       &ACCENT_1,
       &|(x, y), size, style| {
         EmptyElement::at((x, y))
-          + Circle::new((0, 0), size, style.filled())
+          + Circle::new(
+            (0, 0),
+            size,
+            if render_point_circles {
+              style.filled()
+            } else {
+              TRANSPARENT.filled()
+            },
+          )
           + Text::new(
             {
               if (x - 1) % 2 != 0 {
