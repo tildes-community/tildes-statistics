@@ -65,5 +65,5 @@ pub fn get_env_var(key: &str) -> Result<String> {
 
 /// Create a [`NaiveDate`] for today.
 pub fn today() -> NaiveDate {
-  Utc::now().date().naive_utc()
+  Utc::now().date_naive()
 }
