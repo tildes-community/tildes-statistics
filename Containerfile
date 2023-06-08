@@ -1,4 +1,4 @@
-FROM rust:1.64 as builder
+FROM rust:1.70 as builder
 
 # Create a new empty project.
 RUN USER=root cargo new --bin tildes-statistics
