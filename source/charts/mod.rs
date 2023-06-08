@@ -60,7 +60,7 @@ impl UserCountChart {
 
     let chart_root = chart_root
       .margin(20, 20, 20, 20)
-      .titled("Tildes User Count", text_style(30))?;
+      .titled("User Count", text_style(30))?;
 
     chart_root.fill(&BACKGROUND_2)?;
 
