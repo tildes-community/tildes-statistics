@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="/css/index.css">
+{% endblock %}
+
+{% block body %}
+<header class="page-header">
+  <img src="/tildes-statistics.png" alt="Tildes Statistics Logo">
+  <h1>{{ group_name }} Statistics</h1>
+</header>
+
+<main class="page-main">
+  <h2>General</h2>
+
+  <img class="chart" src="/charts/user-count/{{ group_name }}.svg"
+    alt="{{ group_name }} User Count Chart">
+</main>
+{% endblock %}

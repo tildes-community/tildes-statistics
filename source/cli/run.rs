@@ -19,7 +19,7 @@ use crate::{
   migrations::Migrator,
   scss::generate_css,
   snapshots::SnapshotModel,
-  templates::HomeTemplate,
+  templates::{GroupTemplate, HomeTemplate},
   utilities::{create_db, today},
 };
 
@@ -117,6 +117,11 @@ pub async fn run() -> Result<()> {
           }
           .render(&output, &group.name, true)
           .await?;
+
+          GroupTemplate::new(&group.name)
+            .await
+            .render_to_file(&output)
+            .await?;
         }
 
         HomeTemplate::new(
