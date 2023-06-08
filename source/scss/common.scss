@@ -36,6 +36,20 @@ li {
   padding: 0;
 }
 
+details {
+  border: 1px dashed var(--foreground-1);
+
+  summary {
+    background-color: var(--background-2);
+    cursor: pointer;
+    padding: var(--medium-spacing);
+  }
+
+  &[open] > summary {
+    border-bottom: 1px dashed var(--foreground-1);
+  }
+}
+
 .bold {
   font-weight: bold;
 }
