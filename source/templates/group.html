@@ -13,6 +13,10 @@
 <main class="page-main">
   <h2>General</h2>
 
+  {% if let Some(description) = group_description %}
+  <blockquote>{{ description }}</blockquote>
+  {% endif %}
+
   <img class="chart" src="/charts/user-count/{{ group_name }}.svg"
     alt="{{ group_name }} User Count Chart">
 </main>

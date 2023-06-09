@@ -118,7 +118,7 @@ pub async fn run() -> Result<()> {
           .render(&output, &group.name, true)
           .await?;
 
-          GroupTemplate::new(&group.name)
+          GroupTemplate::new(group.description.clone(), &group.name)
             .await
             .render_to_file(&output)
             .await?;

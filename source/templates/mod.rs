@@ -86,7 +86,10 @@ pub struct GroupTemplate {
   /// Extra HTML to insert in the head.
   pub extra_head_html: String,
 
-  /// The group name for this group.
+  /// The description for this group.
+  pub group_description: Option<String>,
+
+  /// The name for this group.
   pub group_name: String,
 
   /// The string for the `<title>` element.
@@ -98,7 +101,10 @@ pub struct GroupTemplate {
 
 impl GroupTemplate {
   /// Create a new [`GroupTemplate`].
-  pub async fn new(group_name: &str) -> Self {
+  pub async fn new(
+    group_description: Option<String>,
+    group_name: &str,
+  ) -> Self {
     let extra_body_html = read_to_string("extra-body.html").await;
     let extra_head_html = read_to_string("extra-head.html").await;
 
@@ -106,6 +112,7 @@ impl GroupTemplate {
       base_url: get_base_url(),
       extra_body_html: extra_body_html.unwrap_or_default(),
       extra_head_html: extra_head_html.unwrap_or_default(),
+      group_description,
       group_name: group_name.to_string(),
       page_title: "Tildes Statistics".to_string(),
       today: today(),

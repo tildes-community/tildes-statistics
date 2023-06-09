@@ -26,6 +26,7 @@ a:visited {
   }
 }
 
+blockquote,
 h1,
 h2,
 h3,
@@ -34,6 +35,13 @@ ol,
 li {
   margin: 0;
   padding: 0;
+}
+
+blockquote {
+  background-color: var(--background-2);
+  border-left: 2px solid var(--foreground-1);
+  margin-bottom: var(--medium-spacing);
+  padding: var(--medium-spacing);
 }
 
 details {
