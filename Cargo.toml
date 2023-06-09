@@ -1,7 +1,7 @@
 [package]
 name = "tildes-statistics"
 description = "Statistics for Tildes.net."
-repository = "https://git.bauke.xyz/Bauke/tildes-statistics"
+repository = "https://git.bauke.xyz/tildes-community/tildes-statistics"
 license = "AGPL-3.0-or-later"
 version = "0.1.0"
 authors = ["Bauke <me@bauke.xyz>"]
@@ -40,7 +40,7 @@ features = ["encoding", "h1-client-rustls", "middleware-logger"]
 version = "2.3.2"
 
 [dependencies.tildes-parser]
-git = "https://git.bauke.xyz/Bauke/tildes-parser.git"
+git = "https://git.bauke.xyz/tildes-community/tildes-parser.git"
 rev = "08bf7ed"
 
 [dependencies.tracing-subscriber]
