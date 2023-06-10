@@ -27,7 +27,7 @@ pub mod utilities;
 /// ```
 /// sea-orm-cli generate entity -o source/entities
 /// ```
-#[allow(missing_docs, clippy::derive_partial_eq_without_eq)]
+#[allow(missing_docs)]
 pub mod entities;
 
 /// The main function.
