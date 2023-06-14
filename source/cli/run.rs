@@ -111,12 +111,13 @@ pub async fn run() -> Result<()> {
         create_dir_all(&output).await?;
 
         for group in &groups {
-          UserCountChart {
+          let chart = UserCountChart {
             groups: GroupDataModel::get_n_most_recent(&db, 31, &group.name)
               .await?,
-          }
-          .render(&output, &group.name, true)
-          .await?;
+          };
+
+          chart.render(&output, &group.name, true, true).await?;
+          chart.render(&output, &group.name, true, false).await?;
 
           GroupTemplate::new(group.description.clone(), &group.name)
             .await
@@ -138,6 +139,13 @@ pub async fn run() -> Result<()> {
           let path =
             output.join(&format!("charts/user-count/{}.svg", &group.name));
           copy(path, output.join("charts/main-user-count.svg")).await?;
+
+          let path = output.join(&format!(
+            "charts-untruncated/user-count/{}.svg",
+            &group.name
+          ));
+          copy(path, output.join("charts-untruncated/main-user-count.svg"))
+            .await?;
         }
       }
     },

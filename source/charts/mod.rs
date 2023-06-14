@@ -28,8 +28,13 @@ impl UserCountChart {
     parent: &PathBuf,
     group_name: &str,
     render_point_circles: bool,
+    truncate: bool,
   ) -> Result<PathBuf> {
-    let parent = parent.join("charts/user-count");
+    let parent = if truncate {
+      parent.join("charts/user-count")
+    } else {
+      parent.join("charts-untruncated/user-count")
+    };
     create_dir_all(&parent).await?;
 
     let (mut datapoints, mut min_count, mut max_count) = (vec![], i64::MAX, 0);
@@ -47,7 +52,7 @@ impl UserCountChart {
     }
 
     let datapoints_len = datapoints.len() as isize;
-    let min_count = min_count - 10;
+    let min_count = if truncate { min_count - 10 } else { 0 };
     let max_count = max_count + 10;
 
     let path = parent.join(format!("{group_name}.svg"));
