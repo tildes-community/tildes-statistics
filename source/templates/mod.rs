@@ -40,7 +40,7 @@ pub struct HomeTemplate {
   pub today: NaiveDate,
 
   /// The user count from the group with the most subscribers.
-  pub user_count: String,
+  pub user_count: i64,
 }
 
 impl HomeTemplate {
@@ -59,9 +59,7 @@ impl HomeTemplate {
       groups,
       page_title: "Tildes Statistics".to_string(),
       today: today(),
-      user_count: user_count
-        .map(|n| n.to_string())
-        .unwrap_or_else(|| "unknown".to_string()),
+      user_count: user_count.unwrap_or(1),
     }
   }
 
@@ -126,5 +124,12 @@ impl GroupTemplate {
     write(output_dir.join("index.html"), self.render()?).await?;
 
     Ok(())
+  }
+}
+
+mod filters {
+  pub fn percentage(a: &i64, b: &i64) -> askama::Result<String> {
+    let percentage = (*a as f64 / *b as f64) * 100_f64;
+    Ok(format!("{:.2}%", percentage))
   }
 }

@@ -44,7 +44,11 @@
           <td>
             <a href="/{{ group.name }}">{{ group.name }}</a>
           </td>
-          <td>{{ group.subscribers }}</td>
+          <td>
+            {{ group.subscribers }}&nbsp;<span class="small"
+              title="Percentage of subscribers compared to the highest-subscribed group."
+            >({{ group.subscribers|percentage(user_count) }})</span>
+          </td>
           <td>
             {% if let Some(description) = group.description %}
             {{ description }}
