@@ -136,16 +136,12 @@ pub async fn run() -> Result<()> {
         write_assets(&output).await?;
 
         if let Some(group) = user_count_group {
-          let path =
-            output.join(&format!("charts/user-count/{}.svg", &group.name));
-          copy(path, output.join("charts/main-user-count.svg")).await?;
-
-          let path = output.join(&format!(
-            "charts-untruncated/user-count/{}.svg",
-            &group.name
-          ));
-          copy(path, output.join("charts-untruncated/main-user-count.svg"))
-            .await?;
+          for dir in ["charts", "charts-untruncated"] {
+            let from_path =
+              output.join(&format!("{}/user-count/{}.svg", dir, &group.name));
+            let to_path = output.join(format!("{}/main-user-count.svg", dir));
+            copy(from_path, to_path).await?;
+          }
         }
       }
     },
