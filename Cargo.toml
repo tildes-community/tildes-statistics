@@ -18,6 +18,7 @@ chrono = "0.4.22"
 color-eyre = "0.6.2"
 dotenvy = "0.15.5"
 grass = "0.11.2"
+scraper = "0.16.0"
 sea-orm-migration = "0.11.3"
 tracing = "0.1.36"
 
@@ -41,7 +42,7 @@ version = "2.3.2"
 
 [dependencies.tildes-parser]
 git = "https://git.bauke.xyz/tildes-community/tildes-parser.git"
-rev = "08bf7ed"
+rev = "6f0d4d394d533a331b0c9cf19fe80d60f0865ca7"
 
 [dependencies.tracing-subscriber]
 features = ["env-filter"]

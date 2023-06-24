@@ -9,9 +9,9 @@ use {
     eyre::{eyre, WrapErr},
     Result,
   },
+  scraper::Html,
   sea_orm::{ConnectOptions, Database, DatabaseConnection},
   surf::{Client, Config},
-  tildes_parser::Html,
 };
 
 /// Creates the SeaQL [`DatabaseConnection`].
