@@ -42,6 +42,20 @@ impl GroupDataModel {
     Ok(group)
   }
 
+  /// Get all the saved group datas from a given group name.
+  pub async fn get_all(
+    db: &DatabaseConnection,
+    name: &str,
+  ) -> Result<Vec<Self>> {
+    Ok(
+      GroupDataEntity::find()
+        .order_by_asc(GroupDataColumn::SnapshotId)
+        .filter(GroupDataColumn::Name.eq(name))
+        .all(db)
+        .await?,
+    )
+  }
+
   /// Get the N most recently saved group datas from a given group name.
   pub async fn get_n_most_recent(
     db: &DatabaseConnection,

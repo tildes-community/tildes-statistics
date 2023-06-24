@@ -29,12 +29,9 @@ impl UserCountChart {
     group_name: &str,
     render_point_circles: bool,
     truncate: bool,
+    output_dir: &str,
   ) -> Result<PathBuf> {
-    let parent = if truncate {
-      parent.join("charts/user-count")
-    } else {
-      parent.join("charts-untruncated/user-count")
-    };
+    let parent = parent.join(format!("{}/user-count", output_dir));
     create_dir_all(&parent).await?;
 
     let (mut datapoints, mut min_count, mut max_count) = (vec![], i64::MAX, 0);

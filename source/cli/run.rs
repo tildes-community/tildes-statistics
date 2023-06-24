@@ -115,9 +115,31 @@ pub async fn run() -> Result<()> {
             groups: GroupDataModel::get_n_most_recent(&db, 31, &group.name)
               .await?,
           };
+          chart
+            .render(&output, &group.name, true, true, "charts")
+            .await?;
+          chart
+            .render(&output, &group.name, true, false, "charts-untruncated")
+            .await?;
 
-          chart.render(&output, &group.name, true, true).await?;
-          chart.render(&output, &group.name, true, false).await?;
+          {
+            let total_chart = UserCountChart {
+              groups: GroupDataModel::get_all(&db, &group.name).await?,
+            };
+
+            total_chart
+              .render(&output, &group.name, false, true, "charts-total")
+              .await?;
+            total_chart
+              .render(
+                &output,
+                &group.name,
+                false,
+                false,
+                "charts-total-untruncated",
+              )
+              .await?;
+          }
 
           GroupTemplate::new(group.description.clone(), &group.name)
             .await
