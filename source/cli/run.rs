@@ -102,7 +102,7 @@ pub async fn run() -> Result<()> {
           if let Some(snapshot) = SnapshotModel::get_most_recent(&db).await? {
             (
               GroupDataModel::get_all_by_snapshot(&db, &snapshot).await?,
-              GroupDataModel::get_highest_subscribers(&db, &snapshot).await?,
+              GroupDataModel::get_tildes_official_data(&db, &snapshot).await?,
             )
           } else {
             (vec![], None)

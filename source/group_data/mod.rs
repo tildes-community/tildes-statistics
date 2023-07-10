@@ -28,14 +28,15 @@ impl GroupDataModel {
     Ok(groups)
   }
 
-  /// Get the group with the highest subscriber count from a given snapshot.
-  pub async fn get_highest_subscribers(
+  /// Get the group data for ~tildes.official.
+  pub async fn get_tildes_official_data(
     db: &DatabaseConnection,
     snapshot: &SnapshotModel,
   ) -> Result<Option<Self>> {
     let group = snapshot
       .find_related(GroupDataEntity)
       .order_by_desc(GroupDataColumn::Subscribers)
+      .filter(GroupDataColumn::Name.eq("~tildes.official"))
       .one(db)
       .await?;
 
