@@ -11,7 +11,7 @@ rustPlatform.buildRustPackage rec {
   meta = with lib; {
     description = "Statistics for Tildes.net.";
     homepage = "https://ts.bauke.xyz";
-    license = licenses.mit;
+    license = licenses.agpl3Plus;
     maintainers = with maintainers; [ Bauke ];
   };
 }
