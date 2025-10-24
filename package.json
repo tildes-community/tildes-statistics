@@ -4,7 +4,7 @@
     "test": "stylelint 'source/**/*.scss'"
   },
   "dependencies": {
-    "modern-normalize": "^2.0.0"
+    "modern-normalize": "^3.0.1"
   },
   "devDependencies": {
     "stylelint": "^15.7.0",

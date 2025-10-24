@@ -8,8 +8,7 @@ use {
   color_eyre::{eyre::Context, Result},
 };
 
-const MODERN_NORMALIZE_CSS: &str =
-  include_str!("../../node_modules/modern-normalize/modern-normalize.css");
+const MODERN_NORMALIZE_CSS: &str = include_str!("./modern-normalize.css");
 
 /// Generate the CSS files and write them.
 pub async fn generate_css(parent: &PathBuf) -> Result<()> {
