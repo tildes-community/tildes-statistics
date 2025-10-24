@@ -32,7 +32,7 @@ features = ["line_series", "point_series", "svg_backend"]
 version = "0.3.4"
 
 [dependencies.sea-orm]
-features = ["macros", "mock", "runtime-async-std-rustls", "sqlx-postgres"]
+features = ["macros", "mock", "runtime-async-std-rustls", "sqlx-sqlite"]
 version = "0.11.3"
 
 [dependencies.surf]
