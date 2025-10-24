@@ -6,7 +6,7 @@ rustPlatform.buildRustPackage rec {
 
   src = ./.;
 
-  cargoHash = "sha256-z3OkYWvK8n7QYL4EuVudgSufGJzzZP3Q3lctySt3Fcs=";
+  cargoHash = "sha256-4bdkOeb/NOhMKhUjji5Tjv8HZZGn65vJm0h+Tm/eZ50=";
 
   meta = with lib; {
     description = "Statistics for Tildes.net.";
