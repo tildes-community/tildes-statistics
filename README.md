@@ -8,4 +8,4 @@ Found a problem or want to request a new feature? Message [@Bauke](https://tilde
 
 ## License
 
-Distributed under the [AGPL-3.0-or-later](https://spdx.org/licenses/AGPL-3.0-or-later.html) license, see [LICENSE](https://git.bauke.xyz/tildes-community/tildes-statistics/src/branch/main/LICENSE) for more information.
+Distributed under the [AGPL-3.0-or-later](https://spdx.org/licenses/AGPL-3.0-or-later.html) license, see [LICENSE](https://github.com/tildes-community/tildes-statistics/src/branch/main/LICENSE) for more information.
